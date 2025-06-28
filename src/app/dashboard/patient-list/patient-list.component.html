@@ -1,0 +1,14 @@
+<mat-toolbar >
+      <span>Patient-List</span>
+    </mat-toolbar>
+<div class="content" style="width: 100%; height: 100%;">
+
+    <!-- The AG Grid component, with Dimensions, CSS Theme, Row Data, and Column Definition -->
+      <ag-grid-angular
+        style="width: 100%; height: 100%;"
+        [rowData]="rowData"
+        [columnDefs]="columnDefs"
+        [defaultColDef]="defaultColDef"
+        (gridReady)="gridReady($event)"
+      />
+</div>

@@ -1,0 +1,19 @@
+.sidenav-container {
+  height: 100vh;
+}
+
+.sidenav {
+  width: 25%;
+  min-width: 200px;
+  max-width: 300px;
+}
+
+.content {
+  padding: 16px;
+  height: 100%;
+}
+
+.active-link {
+  font-weight: bold;
+  color: #3f51b5;
+}

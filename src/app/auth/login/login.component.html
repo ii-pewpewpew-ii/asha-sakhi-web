@@ -1,0 +1,30 @@
+<mat-card class="login-card">
+  <h2 style="text-align: center; margin-bottom: 20px;">Login</h2>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="outline">
+      <mat-label>Phone Number</mat-label>
+      <input matInput type="tel" formControlName="phone" />
+      <mat-error *ngIf="loginForm.get('phone')?.hasError('required')">
+        Phone number is required
+      </mat-error>
+      <mat-error *ngIf="loginForm.get('phone')?.hasError('pattern')">
+        Enter a valid 10-digit phone number
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Password</mat-label>
+      <input matInput type="password" formControlName="password" />
+      <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
+        Password is required
+      </mat-error>
+      <mat-error *ngIf="loginForm.get('password')?.hasError('minlength')">
+        Minimum 6 characters required
+      </mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button color="accent" type="submit" [disabled]="loginForm.invalid">
+      Login
+    </button>
+  </form>
+</mat-card>
