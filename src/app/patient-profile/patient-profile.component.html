@@ -1,0 +1,139 @@
+<div class="view-wrapper">
+    <mat-toolbar color="primary" class="toolbar">
+        <div class="profile-section">
+            <img class="profile-photo" [src]="'data:image/jpeg;base64,' + patient.profilePhoto" alt="Profile Photo" />
+        </div>
+        <div class="toolbar-title">{{patient.firstName + ' ' + patient.lastName}}</div>
+
+        <div class="toolbar-spacer"></div>
+
+
+    </mat-toolbar>
+
+    <mat-accordion multi class="accordion-wrapper">
+        <!-- Basic Info -->
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title class="section-title">Basic Information</mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="form-grid">
+                <mat-form-field appearance="fill">
+                    <mat-label>First Name</mat-label>
+                    <input matInput [(ngModel)]="patient.firstName" [disabled]="true" />
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Last Name</mat-label>
+                    <input matInput [(ngModel)]="patient.lastName" [disabled]="true" />
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Date of Birth</mat-label>
+                    <input matInput [matDatepicker]="dobPicker" [(ngModel)]="patient.dateOfBirth" [disabled]="true" />
+                    <mat-datepicker-toggle matSuffix [for]="dobPicker"></mat-datepicker-toggle>
+                    <mat-datepicker #dobPicker></mat-datepicker>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Delivery Date</mat-label>
+                    <input matInput [matDatepicker]="delDatePicker" [(ngModel)]="patient.deliveryDate"
+                        [disabled]="true" />
+                    <mat-datepicker-toggle matSuffix [for]="delDatePicker"></mat-datepicker-toggle>
+                    <mat-datepicker #delDatePicker></mat-datepicker>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Pregnancy Stage</mat-label>
+                    <input matInput [(ngModel)]="patient.pregnancyStage" [disabled]="true" />
+                </mat-form-field>
+            </div>
+        </mat-expansion-panel>
+
+        <!-- Contact Info -->
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title class="section-title">Contact Info</mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="form-grid">
+                <mat-form-field appearance="fill">
+                    <mat-label>Mobile Number</mat-label>
+                    <input matInput [(ngModel)]="patient.mobileNumber" [disabled]="true" />
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Language Preference</mat-label>
+                    <input matInput [(ngModel)]="patient.languagePreference" [disabled]="true" />
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Religion</mat-label>
+                    <input matInput [(ngModel)]="patient.religion" [disabled]="true" />
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Employment Status</mat-label>
+                    <input matInput [(ngModel)]="patient.employmentStatus" [disabled]="true" />
+                </mat-form-field>
+            </div>
+        </mat-expansion-panel>
+
+        <!-- Address Info -->
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title class="section-title">Address</mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="form-grid">
+                <mat-form-field appearance="fill">
+                    <mat-label>City</mat-label>
+                    <input matInput [(ngModel)]="patient.city" [disabled]="true" />
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>State</mat-label>
+                    <input matInput [(ngModel)]="patient.state" [disabled]="true" />
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Latitude</mat-label>
+                    <input matInput [(ngModel)]="patient.latitude" [disabled]="true" />
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Longitude</mat-label>
+                    <input matInput [(ngModel)]="patient.longtitude" [disabled]="true" />
+                </mat-form-field>
+            </div>
+        </mat-expansion-panel>
+
+        <!-- Medical Checkup Info -->
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title class="section-title">Latest Checkup</mat-panel-title>
+            </mat-expansion-panel-header>
+            <ag-grid-angular class="ag-theme-alpine" style="width: 100%; height: 300px;" [columnDefs]="columnDefs"
+                [defaultColDef]="defaultColDef" [singleClickEdit]="true" [stopEditingWhenCellsLoseFocus]="true"
+                (gridReady)="gridReady($event)">
+            </ag-grid-angular>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title class="section-title">Nearest Healthcare Facility</mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ng-container *ngIf="nearestFacility; else loadingOrError">
+                <div class="facility-details">
+                    <p><strong>Name:</strong> {{ nearestFacility.name }}</p>
+                    <p><strong>Type:</strong> {{ nearestFacility.type }}</p>
+                    <p><strong>Distance:</strong> {{ nearestFacility.distance }}</p>
+                    <p><strong>Address:</strong> {{ nearestFacility.address }}</p>
+                </div>
+            </ng-container>
+
+            <ng-template #loadingOrError>
+                <p *ngIf="facilityError" class="error">{{ facilityError }}</p>
+                <p *ngIf="!facilityError">Loading nearest facility...</p>
+            </ng-template>
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>

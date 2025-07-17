@@ -1,10 +1,10 @@
 export interface Appointment {
   workerId?: number;
+  workerName?: string
   patientId?: number;
-  appointmentId?: number;
+  patientName: string;
   appointmentDate?: string;
   appointmentStatus?: string;
-  appointmentType?: string | null;
-  createdAt?: string;
-  updatedAt?: string;
+  appointmentId: number
+  checkupIds?: number[];
 }

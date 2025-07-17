@@ -41,6 +41,7 @@ export interface Checkup {
   checkupType?: string;
   checkupStatus?: number;
   checkupTime?: string;
+  riskCategory: string;
 }
 
 

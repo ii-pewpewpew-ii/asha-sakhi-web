@@ -1,0 +1,30 @@
+<div class="chat-wrapper">
+  <mat-form-field appearance="outline" class="dropdown-field">
+    <mat-label>Select Patient</mat-label>
+    <mat-select [(ngModel)]="selectedPatientPhone" (selectionChange)="onPatientChange()">
+      <mat-option *ngFor="let patient of patients" [value]="patient.mobileNumber">
+        {{ patient.fullName }} ({{ patient.mobileNumber }})
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div class="chat-history">
+    <div *ngFor="let msg of messages" class="message" [ngClass]="msg.sender">
+      <div class="bubble">
+        {{ msg.text }}
+        <div class="timestamp">{{ msg.timestamp | date: 'shortTime' }}</div>
+      </div>
+    </div>
+
+  </div>
+  <div class="chat-input">
+    <mat-form-field class="input-field" appearance="outline">
+      <input matInput [(ngModel)]="messageText" placeholder="Type your message" (keyup.enter)="sendMessage()">
+    </mat-form-field>
+    <button mat-icon-button color="primary" (click)="sendMessage()">
+      <mat-icon>send</mat-icon>
+    </button>
+  </div>
+
+
+</div>

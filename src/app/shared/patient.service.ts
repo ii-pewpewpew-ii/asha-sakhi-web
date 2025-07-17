@@ -21,6 +21,25 @@ export class PatientService {
     if(workerId) {
       params = params.set("workerId", workerId)
     }
-    return this.http.get<SakhiApiResponse<Appointment[]>>(API_BASE_URL + "appointment/fetch-appointments", {params: params});
+    return this.http.get<SakhiApiResponse<Appointment[]>>(API_BASE_URL + "appointment/fetch-all", {params: params});
   }
+
+  fetchPatientData(patientId: number) {
+    let params = new HttpParams();
+    params = params.set("patientId", patientId);
+    return this.http.get(API_BASE_URL + "patient/patient-details", {params: params});
+  }
+  
+  fetchPatientNumbers() {
+    return this.http.get(API_BASE_URL+ 'patient/fetch-patient-numbers');
+  }
+
+  queryPatientLlm(phoneNumber: string, query: string){
+    let params = new HttpParams();
+    params = params.append("mobileNumber", phoneNumber);
+    params = params.append("query", query);
+    return this.http.get<any>(API_BASE_URL + 'patient/query-chat', { params: params})
+  }
+
+  
 }

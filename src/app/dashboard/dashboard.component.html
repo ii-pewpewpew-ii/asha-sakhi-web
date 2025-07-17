@@ -1,22 +1,29 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #sidenav mode="side" opened class="sidenav">
-    <mat-toolbar color="primary">Menu</mat-toolbar>
+    <mat-toolbar class="custom-toolbar">Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item routerLink="patient-list" routerLinkActive="active-link">Patients</a>
-      <a mat-list-item routerLink="appointment-list" routerLinkActive="active-link">Appointments</a>
+      <a mat-list-item routerLink="home" routerLinkActive="active-link"> <mat-icon class="nav-icon">home</mat-icon>
+        <span class="nav-label">Home</span></a>
+      <a mat-list-item routerLink="patient-list" routerLinkActive="active-link"> <mat-icon class="nav-icon">people</mat-icon>
+        <span class="nav-label">Patients</span></a>
+      <a mat-list-item routerLink="appointment-list" routerLinkActive="active-link"> <mat-icon class="nav-icon">event</mat-icon>
+        <span class="nav-label">Appointments</span></a>
+      <a mat-list-item routerLink="diet-chat" routerLinkActive="active-link"> <mat-icon class="nav-icon">smart_toy</mat-icon>
+        <span class="nav-label">AI Assistance</span></a>
     </mat-nav-list>
   </mat-sidenav>
 
   <mat-sidenav-content>
 
-    <mat-toolbar color="primary">
+    <mat-toolbar color="accent" class="custom-toolbar">
       <button mat-icon-button (click)="toggleSideNav()" aria-label="Toggle sidenav">
         <mat-icon>menu</mat-icon>
       </button>
-      <span>ASHA-Sakhi</span>
+      <img src="assets/Asha-logo.png" alt="Logo" class="logo" />
+      <span>ASHA सखी</span>
     </mat-toolbar>
-      <div class="content">
-        <app-loader></app-loader>
+    <div class="content">
+      <app-loader></app-loader>
       <router-outlet></router-outlet>
     </div>
   </mat-sidenav-content>

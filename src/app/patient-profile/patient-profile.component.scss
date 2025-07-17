@@ -1,0 +1,44 @@
+.accordion-wrapper {
+  margin: 16px;
+}
+
+.section-title {
+  font-weight: bold;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  padding: 16px 0;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+}
+
+.toolbar-title {
+  font-weight: bold;
+  font-size: 16px;
+  margin-left: 2%;
+}
+
+.toolbar-spacer {
+  flex: 1;
+}
+
+.profile-section {
+  display: flex;
+  align-items: center;
+}
+
+.profile-photo {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #fff;
+}
