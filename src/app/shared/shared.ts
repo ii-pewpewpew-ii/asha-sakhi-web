@@ -11,4 +11,4 @@ export interface Hospital {
   telephone: string;
 }
 
-export const API_BASE_URL = "http://localhost:8080/api/"
+export const API_BASE_URL = "http://216.48.183.188:8080/api/"

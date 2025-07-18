@@ -33,13 +33,13 @@ interface Hospital {
   <mat-card class="info-card">
     <div class="info-box">
     <h3 class="info-title">Hospital Summary</h3>
-
     <div class="chip-group">
       <mat-chip color="primary" selected>Hospitals: {{ hospitalCount }}</mat-chip>
       <mat-chip color="accent" selected>Clinics: {{ clinicCount }}</mat-chip>
       <mat-chip color="warn" selected>Colleges: {{ collegeCount }}</mat-chip>
-      <mat-chip selected>Other: {{ otherCount }}</mat-chip>
     </div>
+    *data sourced from national health portal (last updated 06/25)
+
   </div>
   <div class="map-container-wrapper">
   <div #mapElement class="map-container"></div>
@@ -68,13 +68,17 @@ interface Hospital {
   position: absolute;
   top: 10px;
   right: 10px;
-  background: black;
+  background: #3E5F44;
   border: 1px solid #ccc;
   padding: 10px;
   font-size: 14px;
   border-radius: 4px;
-  box-shadow: 0 0 5px rgba(0,0,0,0.2);
+  box-shadow: 0 0 5px rgba(81, 255, 81, 0.2);
   color: white;
+}
+
+.info-card {
+  background-color: #3E5F44
 }
 
 .legend-dot {
@@ -113,10 +117,9 @@ export class OpenLayersMapComponent implements OnInit {
   private checkupService = inject(CheckupService);
 
   map!: Map;
-  hospitalCount = 0;
-  clinicCount = 0;
-  collegeCount = 0;
-  otherCount = 0;
+  hospitalCount = 23824;
+  clinicCount = 1641;
+  collegeCount = 171;
   riskLevels: { level: string, count: number }[] = [];
 
   ngOnInit() {
@@ -165,28 +168,6 @@ export class OpenLayersMapComponent implements OnInit {
     return new VectorLayer({
       source: new VectorSource({ features })
     });
-  }
-
-  private categorizeHospitals(hospitals: Hospital[]) {
-    // Reset
-    this.hospitalCount = 0;
-    this.clinicCount = 0;
-    this.collegeCount = 0;
-    this.otherCount = 0;
-    const riskMap: { [key: string]: number } = {};
-
-    hospitals.forEach(h => {
-      const care = h.hospital_care_type?.toLowerCase() || '';
-      if (care.includes('hospital')) this.hospitalCount++;
-      else if (care.includes('clinic')) this.clinicCount++;
-      else if (care.includes('college')) this.collegeCount++;
-      else this.otherCount++;
-
-      const risk = h.pregnancy_risk_level?.toUpperCase() || 'UNKNOWN';
-      riskMap[risk] = (riskMap[risk] || 0) + 1;
-    });
-
-    this.riskLevels = Object.entries(riskMap).map(([level, count]) => ({ level, count }));
   }
 
   private getColor(careType: string): string {
